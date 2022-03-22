@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace NetMind.Models
 {
-    public class User: IdentityUser<int>
+    public class User
     {
-        public User()
-        {
-            SecurityStamp = Guid.NewGuid().ToString();
-        }
+        public int Id { get; set; }
 
-        public User(string userName) : this()
-        {
-            UserName = userName;
-        }
+        [MaxLength(100)]
+        public string UserName { get; set; }
+        
+        [MaxLength(100)]
+        public string Email { get; set; }
+        
+        [MaxLength(24)]
+        public string Salt { get; set; }
+        
+        [MaxLength(64)]
+        public string PasswordHash { get; set; }
     }
-
-    public class CustomUserRole : IdentityUserRole<int> { }
-
-    public class CustomRole: IdentityRole<int> { }
-    public class CustomUserClaim : IdentityUserClaim<int> { }
-
-    public class CustomRoleClaim : IdentityRoleClaim<int> { }
-    public class CustomUserLogin : IdentityUserLogin<int> { }
 }

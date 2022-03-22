@@ -1,0 +1,59 @@
+﻿@model NetMind.Areas.Site.Models.Issue
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-header justify-content-center">
+        New issue
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group cols-md-3 row">
+                <label asp-for="ProjectID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="ProjectID" class="form-control col-sm-3" asp-items="ViewBag.Project"></select>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="CreatorID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="CreatorID" class="form-control col-sm-3" asp-items="ViewBag.CreatorID"></select>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="AssigneeID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="AssigneeID" class="form-control col-sm-3" asp-items="ViewBag.AssigneeID"></select>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="Title" class="control-label col-sm-2 col-form-label"></label>
+                <input asp-for="Title" class="form-control col-sm-10" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="Description" class="control-label col-sm-2 col-form-label"></label>
+                <input asp-for="Description" class="form-control col-sm-10" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="StatusID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="StatusID" class="form-control col-sm-3" asp-items="ViewBag.Status"></select>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="TrackerID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="TrackerID" class="form-control col-sm-3" asp-items="ViewBag.Tracker"></select>
+            </div>
+            <div class="form-group cols-md-3 row">
+                <label asp-for="PriorityID" class="control-label col-sm-2 col-form-label"></label>
+                <select asp-for="PriorityID" class="form-control col-sm-3" asp-items="ViewBag.Priority"></select>
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

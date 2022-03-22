@@ -1,0 +1,47 @@
+﻿@model NetMind.Models.RegisterModel
+
+@{
+    ViewData["Title"] = "Reģistrācija";
+}
+
+<div class="container" style="padding-top: 120px">
+    <div class="row justify-content-center">
+        <div class="card rounded shadow">
+            <div class="card-header">
+                <h3>Reģistrācija</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input type="text" asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input type="text" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger" />
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Reģistrācija" class="btn btn-outline-dark btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="navbar-brand" asp-area="Site" asp-controller="Issues" asp-action="Index">Issues</a>
+        <a class="navbar-brand" asp-area="Site" asp-controller="Issues" asp-action="Create">New Issue</a>
+        <a class="navbar-brand" asp-area="Site" asp-controller="Home" asp-action="Index">RoadMap</a>
+        <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Administration</a>
+        <a class="navbar-brand" asp-area="" asp-controller="" asp-action="Logout">Logout</a>
+    </nav>
+
+    @await RenderSectionAsync("Navi", required: false)
+</header>
+
+
+
+<div class="container-fluid">
+    @RenderBody()
+</div>
+
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+

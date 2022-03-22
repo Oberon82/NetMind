@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetMind.Controllers
 {
+
+    [Area("Site")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +21,9 @@ namespace NetMind.Controllers
             _logger = logger;
         }
 
+        [Route("home")]
+        [Route("/", Name = "Home")]
+        [Authorize]
         public IActionResult Index()
         {
             return View();

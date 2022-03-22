@@ -1,0 +1,89 @@
+﻿@model IEnumerable<NetMind.Areas.Site.Models.Issue>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssigneeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriorityID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Project.Name)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Creator.Name)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Assignee.Name)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tracker.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority.Name)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IssueID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IssueID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IssueID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
