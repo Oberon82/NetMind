@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using NetMind.Data;
 using NetMind.Models;
 using System.Security.Cryptography;
+using NetMind;
 
 namespace NetMind.Controllers
 {
@@ -60,9 +61,23 @@ namespace NetMind.Controllers
         
         [HttpGet]
         [Route("Register", Name = "Register")]
-        public IActionResult Register()
+        public IActionResult Register(DummyUserCountService userCount)
         {
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                if (!userCount.HasUser())
+                {
+                    return Redirect("Home");
+                }
+                else
+                {
+                    return View();
+                }
+            }
         }
         
         [HttpPost]

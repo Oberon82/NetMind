@@ -40,7 +40,6 @@ namespace NetMind.Areas.Site.Controllers
                 .Include(i => i.Assignee)
                 .Include(i => i.Creator)
                 .Include(i => i.Priority)
-                .Include(i => i.Project)
                 .Include(i => i.Status)
                 .Include(i => i.Tracker)
                 .FirstOrDefaultAsync(m => m.IssueID == id);
@@ -58,7 +57,6 @@ namespace NetMind.Areas.Site.Controllers
             ViewData["Assignee"] = new SelectList(_context.Users, "UserID", "Name");
             ViewData["Creator"] = new SelectList(_context.Users, "UserID", "Name");
             ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name");
-            ViewData["Project"] = new SelectList(_context.Projects, "ProjectID", "Name");
             ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name");
             ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name");
             return View();
@@ -83,7 +81,6 @@ namespace NetMind.Areas.Site.Controllers
             ViewData["Assignee"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
             ViewData["Creator"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
             ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
-            ViewData["Project"] = new SelectList(_context.Projects, "ProjectID", "Name", issue.ProjectID);
             ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
             ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
             return View(issue);
@@ -105,7 +102,6 @@ namespace NetMind.Areas.Site.Controllers
             ViewData["AssigneeID"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
             ViewData["CreatorID"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
             ViewData["PriorityID"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "Name", issue.ProjectID);
             ViewData["StatusID"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
             ViewData["TrackerID"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
             return View(issue);
@@ -146,7 +142,6 @@ namespace NetMind.Areas.Site.Controllers
             ViewData["AssigneeID"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
             ViewData["CreatorID"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
             ViewData["PriorityID"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
-            ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "Name", issue.ProjectID);
             ViewData["StatusID"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
             ViewData["TrackerID"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
             return View(issue);
@@ -164,7 +159,6 @@ namespace NetMind.Areas.Site.Controllers
                 .Include(i => i.Assignee)
                 .Include(i => i.Creator)
                 .Include(i => i.Priority)
-                .Include(i => i.Project)
                 .Include(i => i.Status)
                 .Include(i => i.Tracker)
                 .FirstOrDefaultAsync(m => m.IssueID == id);

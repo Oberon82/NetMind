@@ -14,11 +14,6 @@ namespace NetMind.Areas.Site.Models
     {
         public int IssueID { get; set; }
 
-        [Display(Name = "Project")]
-        public int ProjectID { get; set; }
-
-        public Project Project { get; set; }
-
         [Display(Name = "Creator")]
         public int CreatorID { get; set; }
 

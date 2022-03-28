@@ -17,7 +17,6 @@ namespace NetMind.Data
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Tracker> Trackers { get; set; }
         public DbSet<Priority> Priorities { get; set; }
-        public DbSet<Project> Projects { get; set; }
         public DbSet<Issue> Issue { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
