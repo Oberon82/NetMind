@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<NetMind.Models.User>
 
+@{
+    ViewData["Title"] = "Users";
+    ViewData["CardTitle"] = "Users";
+    Layout = "ListView";
+}
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="text-decoration-none">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -15,15 +21,16 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

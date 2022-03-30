@@ -12,6 +12,7 @@ namespace NetMind.Areas.Site.Models
 {
     public class Issue
     {
+        [Display(Name = "#")]
         public int IssueID { get; set; }
 
         [Display(Name = "Creator")]
@@ -22,27 +23,32 @@ namespace NetMind.Areas.Site.Models
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Assignee")]
-        public int AssigneeID { get; set; }
+        public int? AssigneeID { get; set; }
 
         public User Assignee { get; set; }
 
         public DateTime UpdatedOn { get; set; }
         
+        [Required]
         [MaxLength(1000)]
         public string Title { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "Status")]
+        [Required]
         public int StatusID { get; set; }
 
         public Status Status { get; set; }
 
         [Display(Name = "Tracker")]
+        [Required]
         public int TrackerID { get; set; }
 
         public Tracker Tracker { get; set; }
 
         [Display(Name = "Priority")]
+        [Required]
         public int PriorityID { get; set; }
 
         public Priority Priority { get; set; }

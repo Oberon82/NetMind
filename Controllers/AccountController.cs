@@ -43,7 +43,7 @@ namespace NetMind.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user != null && CheckPassword(user, model.Password))
                 {
-                    await Authenticate(model.Email, model.RememberMe); // аутентификация
+                    await Authenticate(model.Email, model.RememberMe, user.Id); // аутентификация
 
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
@@ -71,11 +71,11 @@ namespace NetMind.Controllers
             {
                 if (!userCount.HasUser())
                 {
-                    return Redirect("Home");
+                    return View();
                 }
                 else
                 {
-                    return View();
+                    return Redirect("Home");
                 }
             }
         }
@@ -126,12 +126,13 @@ namespace NetMind.Controllers
         }
 
 
-        private async Task Authenticate(string userName, bool rememberMe)
+        private async Task Authenticate(string userName, bool rememberMe, int userID)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim("id", userID.ToString())
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "_TopView";
+}
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-header justify-content-center">
+        @ViewData["CardTitle"]
+    </div>
+    <div class="card-body">
+        @RenderBody()
+    </div>
+</div>

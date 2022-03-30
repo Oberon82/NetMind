@@ -24,7 +24,7 @@ namespace NetMind.Areas.Site.Controllers
         // GET: Site/Issues
         public async Task<IActionResult> Index()
         {
-            var netMindContext = _context.Issue;//.Include(i => i.Assignee).Include(i => i.Creator).Include(i => i.Priority).Include(i => i.Project).Include(i => i.Status).Include(i => i.Tracker);
+            var netMindContext = _context.Issue.Include(i => i.Assignee).Include(i => i.Creator).Include(i => i.Priority).Include(i => i.Status).Include(i => i.Tracker);
             return View(await netMindContext.ToListAsync());
         }
 
@@ -54,8 +54,20 @@ namespace NetMind.Areas.Site.Controllers
         // GET: Site/Issues/Create
         public IActionResult Create()
         {
-            ViewData["Assignee"] = new SelectList(_context.Users, "UserID", "Name");
-            ViewData["Creator"] = new SelectList(_context.Users, "UserID", "Name");
+            if (_context.Trackers.Count() == 0)
+            {
+                return RedirectToAction("Create", "Trackers", new { area = "Admin" });
+            }
+            else if (_context.Priorities.Count() == 0)
+            {
+                return RedirectToAction("Create", "Priorities", new { area = "Admin" });
+            }
+            else if (_context.Statuses.Count() == 0)
+            {
+                return RedirectToAction("Create", "Statuses", new { area = "Admin" });
+            }
+
+            ViewData["Assignee"] = new SelectList(_context.Users, "Id", "UserName");
             ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name");
             ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name");
             ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name");
@@ -73,13 +85,15 @@ namespace NetMind.Areas.Site.Controllers
             {
                 issue.CreatedOn = DateTime.Now;
                 issue.UpdatedOn = DateTime.Now;
+                string tmpid = User.FindFirst(x => x.Type == "id").Value;
+
+                issue.CreatorID = int.Parse(tmpid);
 
                 _context.Add(issue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Assignee"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
-            ViewData["Creator"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
+            ViewData["Assignee"] = new SelectList(_context.Users, "Id", "UserName", issue.AssigneeID);
             ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
             ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
             ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
@@ -92,18 +106,17 @@ namespace NetMind.Areas.Site.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
+            }           
 
             var issue = await _context.Issue.FindAsync(id);
             if (issue == null)
             {
                 return NotFound();
             }
-            ViewData["AssigneeID"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
-            ViewData["CreatorID"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
-            ViewData["PriorityID"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
-            ViewData["StatusID"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
-            ViewData["TrackerID"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
+            ViewData["Assignee"] = new SelectList(_context.Users, "Id", "UserName", issue.AssigneeID);
+            ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
+            ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
+            ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
             return View(issue);
         }
 
@@ -139,11 +152,10 @@ namespace NetMind.Areas.Site.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AssigneeID"] = new SelectList(_context.Users, "UserID", "Name", issue.AssigneeID);
-            ViewData["CreatorID"] = new SelectList(_context.Users, "UserID", "Name", issue.CreatorID);
-            ViewData["PriorityID"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
-            ViewData["StatusID"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
-            ViewData["TrackerID"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
+            ViewData["Assignee"] = new SelectList(_context.Users, "Id", "UserName", issue.AssigneeID);
+            ViewData["Priority"] = new SelectList(_context.Priorities, "PriorityID", "Name", issue.PriorityID);
+            ViewData["Status"] = new SelectList(_context.Statuses, "StatusID", "Name", issue.StatusID);
+            ViewData["Tracker"] = new SelectList(_context.Trackers, "TrackerID", "Name", issue.TrackerID);
             return View(issue);
         }
 

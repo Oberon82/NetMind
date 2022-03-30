@@ -2,39 +2,27 @@
 
 @{
     ViewData["Title"] = "Create";
+    ViewData["CardTitle"] = "Priority";
+    Layout = "EditView";
 }
 
-<h1>Create</h1>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>Priority</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDefault" /> @Html.DisplayNameFor(model => model.IsDefault)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-1 col-form-label"></label>
+        <input asp-for="Name" class="col-sm-3 form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    <div class="form-group form-check">
+        <label class="form-check-label"></label>
+        <input class="form-check-input" asp-for="IsDefault" /> @Html.DisplayNameFor(model => model.IsDefault)
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label"></label>
+        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="form-group cols-md-3 row">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
