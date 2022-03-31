@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NetMind.Areas.Site.Models;
 using NetMind.Data;
 using NetMind.Models;
+using NetMind.Areas.Admin.Models;
 
 namespace NetMind.Areas.Site.Controllers
 {
@@ -24,7 +25,8 @@ namespace NetMind.Areas.Site.Controllers
         // GET: Site/Issues
         public async Task<IActionResult> Index()
         {
-            var netMindContext = _context.Issue.Include(i => i.Assignee).Include(i => i.Creator).Include(i => i.Priority).Include(i => i.Status).Include(i => i.Tracker);
+            var netMindContext = _context.Issue.Include(i => i.Assignee).Include(i => i.Creator).Include(i => i.Priority).Include(i => i.Status).Include(i => i.Tracker).
+                Where(p => p.IsClosed == false);
             return View(await netMindContext.ToListAsync());
         }
 
@@ -89,6 +91,13 @@ namespace NetMind.Areas.Site.Controllers
 
                 issue.CreatorID = int.Parse(tmpid);
 
+                Status status = _context.Statuses.FirstOrDefault(p => p.StatusID == issue.StatusID);
+
+                if (status is not null)
+                {
+                    issue.IsClosed = status.IsClosed;
+                }
+
                 _context.Add(issue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -136,6 +145,13 @@ namespace NetMind.Areas.Site.Controllers
             {
                 try
                 {
+                    Status status = _context.Statuses.FirstOrDefault(p => p.StatusID == issue.StatusID);
+
+                    if (status is not null)
+                    {
+                        issue.IsClosed = status.IsClosed;
+                    }
+
                     _context.Update(issue);
                     await _context.SaveChangesAsync();
                 }

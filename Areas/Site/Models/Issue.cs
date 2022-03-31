@@ -52,5 +52,8 @@ namespace NetMind.Areas.Site.Models
         public int PriorityID { get; set; }
 
         public Priority Priority { get; set; }
+
+        [Display(Name = "Is closed")]
+        public bool IsClosed { get; set; }
     }
 }
