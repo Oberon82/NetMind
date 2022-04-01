@@ -6,60 +6,64 @@
 
 <h1>Issues</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrackerID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PriorityID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssigneeID)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IssueID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tracker.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priority.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @if (item.Assignee is not null)
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-header justify-content-center">
+        Issues
+    </div>
+    <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IssueID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrackerID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StatusID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PriorityID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssigneeID)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    @Html.DisplayFor(modelItem => item.Assignee.UserName)
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssueID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tracker.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Priority.Name)
+                        </td>
+                        <td>
+                            <a class="text-decoration-none"  asp-action="Details" asp-route-id="@item.IssueID">@Html.DisplayFor(modelItem => item.Title)</a>
+                        </td>
+                        <td>
+                            @if (item.Assignee is not null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Assignee.UserName)
+                            }
+                        </td>
+                    </tr>
                 }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IssueID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IssueID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IssueID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
+
